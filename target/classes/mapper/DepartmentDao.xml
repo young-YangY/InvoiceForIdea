@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.invoicing.dao.DepartmentDao">
+	<!-- 目的：为DAO接口方法提供sql语句配置 -->
+	
+	<insert id="addDepartment">
+		<!-- 主键冲突，报错,ignore忽略报错，返回0 -->
+		insert ignore into department(name,telephone)
+		values(#{departmentName},#{departmentTelephone})
+	</insert>
+  	
+	<select id="queryDepartment" resultType="Department">
+		select deid,name,telephone from department
+	</select>
+  	
+	<select id="queryDepartmentByName" resultType="Department">
+		select deid,name,telephone from department
+		where name = #{departmentName}
+	</select>
+	
+	<select id="queryDepartmentByTelephone" resultType="Department">
+		select deid,name,telephone from department
+		where telephone = #{departmentTelephone}
+	</select>
+
+	<select id="queryDepartmentByNameAndTelephone" resultType="Department">
+		select deid,name,telephone from department
+		where name=#{departmentName} and telephone = #{departmentTelephone}
+	</select>
+	
+	<select id="queryDepartmentById" resultType="Department">
+		select deid,name,telephone from department
+		where deid = #{deid}
+	</select>
+	
+	<update id="update">
+		update department 
+		set name=#{departmentName},telephone=#{departmentTelephone}
+		where deid=#{deid}
+	</update>
+	
+	<delete id="deleteDepartment">
+		delete from department
+		where deid=#{deid}
+	</delete>
+</mapper>
