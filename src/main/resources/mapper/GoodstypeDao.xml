@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.invoicing.dao.GoodstypeDao">
+	<!-- 目的：为DAO接口方法提供sql语句配置 -->
+	
+	<select id="queryAllGoodstype" resultType="Goodstype">
+		select * from goodstype
+	</select>
+	
+	<select id="queryGoodstype" resultType="Goodstype">
+		select * from goodstype
+		where ${sql}
+	</select>
+	
+	<insert id="addGoodstype">
+		insert ignore into goodstype
+		(gsid,name,suid)
+		values(#{gsid},#{name},#{suid})
+	</insert>
+	
+	<update id="updateGoodstype">
+		update goodstype
+		set name='${name}',suid=${suid}
+		where gsid=${gsid}
+	</update>
+	
+	<select id="queryGoodstypeByGsid" resultType="Goodstype">
+		select * from goodstype
+		where gsid = #{gsid}
+	</select>
+	
+	<delete id="deleteGoodstype">
+		delete from goodstype
+		where gsid = #{gsid}
+	</delete>
+</mapper>

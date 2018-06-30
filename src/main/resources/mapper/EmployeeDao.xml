@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.invoicing.dao.EmployeeDao">
+	<!-- 目的：为DAO接口方法提供sql语句配置 -->
+	
+	<insert id="addEmployee" parameterType="com.invoicing.entity.Employee">
+		insert ignore into employee
+		(username,name,password,email,telephone,gender,address,birthdayStr,depName)
+		values(#{username},#{name},#{password},#{email},#{telephone},#{gender},#{address},#{birthdayStr},#{depName})
+ 	</insert>
+ 	
+ 	<select id="queryEmployeeByEmid" resultType="Employee">
+ 		select * from employee
+ 		where emid = #{emid}
+ 	</select>
+		
+	<select id="queryEmployee" resultType="Employee">
+		select * from employee
+		where ${sql}
+	</select>
+	
+	<select id="queryEmployeeByUsernameAndPassword" resultType="Employee">
+		select * from employee 
+		where username = #{username} and password = #{password}
+	</select>
+	
+	<select id="queryAllEmployee" resultType="Employee">
+		select * from employee
+	</select>
+	
+	<update id="updateEmployee">
+		update employee
+		set username=#{username},name=#{name},password=#{password},email=#{email},telephone=#{telephone},gender=#{gender},address=#{address},birthdayStr=#{birthdayStr},depName=#{depName}
+		where emid=#{emid}
+	</update>
+	
+	<delete id="deleteEmployee">
+		delete from employee
+		where emid=#{emid}
+	</delete>
+</mapper>

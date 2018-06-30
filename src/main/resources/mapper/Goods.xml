@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.invoicing.dao.GoodsDao">
+	<!-- 目的：为DAO接口方法提供sql语句配置 -->
+	
+	<insert id="addGoods">
+		insert ignore into goods
+		(supplierId,goodstypeId,name,origin,producer,unit,inPrice,outPrice)
+		values(#{supplierId},#{goodstypeId},#{name},#{origin},#{producer},#{unit},#{inPrice},#{outPrice})
+	</insert>
+	
+	<select id="queryAllGoods" resultType="Goods">
+		select * from goods
+	</select>
+	
+	<select id="queryGoods" resultType="Goods">
+		select * from goods
+		where ${sql}
+	</select>
+	
+	<select id="queryGoodsByGoid" resultType="Goods">
+		select * from goods
+		where goid=#{goid}
+	</select>
+	
+	<delete id="deleteGoods">
+		delete from goods
+		where goid=#{goid}
+	</delete>
+	
+	<update id="updateGoods">
+		update goods
+		set supplierId=#{supplierId},goodstypeId=#{goodstypeId},name=#{name},origin=#{origin},producer=#{producer},unit=#{unit},inPrice=#{inPrice},outPrice=#{outPrice}
+		where goid=#{goid}
+	</update>
+</mapper>
